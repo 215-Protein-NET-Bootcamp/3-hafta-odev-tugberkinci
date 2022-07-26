@@ -11,4 +11,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\3-hafta-odev-tugberkinci.Data\3-hafta-odev-tugberkinci.Data.csproj" />
+    <ProjectReference Include="..\3-hafta-odev-tugberkinci.Dto\3-hafta-odev-tugberkinci.Dto.csproj" />
+    <ProjectReference Include="..\3-hafta-odev-tugberkinci.Service\3-hafta-odev-tugberkinci.Service.csproj" />
+  </ItemGroup>
+
 </Project>
