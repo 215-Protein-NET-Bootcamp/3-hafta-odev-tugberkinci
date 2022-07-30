@@ -4,6 +4,7 @@ using PatikaHomework3.Data.Model;
 using PatikaHomework3.Dto.Dto;
 using PatikaHomework3.Dto.Response;
 using PatikaHomework3.Helpers;
+using PatikaHomework3.Helpers.JwtHelper;
 using PatikaHomework3.Service.IServices;
 
 namespace PatikaHomework3.Controllers
