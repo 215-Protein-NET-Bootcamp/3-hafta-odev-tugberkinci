@@ -12,7 +12,12 @@ namespace PatikaHomework3.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Account>()
+            .HasMany<Person>(g => g.Person)
+            .WithOne(tr => tr.Account).IsRequired().
+            HasForeignKey(s=> s.AccountId);
+            
             modelBuilder.UseSerialColumns();
         }
 

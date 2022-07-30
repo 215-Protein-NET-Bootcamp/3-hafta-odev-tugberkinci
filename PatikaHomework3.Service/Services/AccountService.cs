@@ -1,33 +1,77 @@
-﻿using PatikaHomework3.Data.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using PatikaHomework3.Data.Context;
+using PatikaHomework3.Data.Model;
 using PatikaHomework3.Service.IServices;
 
 namespace PatikaHomework3.Service.Services
 {
     public class AccountService : IAccountService
     {
-        public Account Delete(int id)
+        private readonly EfContext _efContext;
+
+        public AccountService(EfContext EfContext)
         {
-            throw new NotImplementedException();
+            _efContext = EfContext;
         }
 
-        public IEnumerable<Account> GetAll()
+        public async Task<Account> Add(Account entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _efContext.Account.AddAsync(entity);
+                _efContext.SaveChanges();
+                return entity;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw ex;
+            }
+
         }
 
-        public IEnumerable<Account> GetById(int id)
+        public async Task<string> Delete(int id)
         {
-            throw new NotImplementedException();
+            var data = _efContext.Account.SingleOrDefault(x => x.Id == id);
+            if (data == null)
+                return null;
+            try
+            {
+                _efContext.Account.Remove(data);
+                _efContext.SaveChangesAsync();
+                return "Success";
+
+            }
+            catch (DbUpdateException ex)
+            {
+                throw ex;
+            }
         }
 
-        public Account Insert(Account entity)
+        public async Task<Account> GetById(int id)
         {
-            throw new NotImplementedException();
+            return _efContext.Account.SingleOrDefault(x => x.Id == id);
+
         }
 
-        public Account Update(Account entity)
+        public async Task<Account> Update(Account entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _efContext.Account.Update(entity);
+                _efContext.SaveChanges();
+                return entity;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public async Task<IEnumerable<Account>> GetAll()
+        {
+            return await _efContext.Set<Account>().AsNoTracking().ToListAsync();
+
         }
     }
 }

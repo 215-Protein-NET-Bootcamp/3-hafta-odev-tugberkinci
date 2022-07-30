@@ -2,10 +2,10 @@
 {
     public interface IGenericService <T> where T : class
     {
-        IEnumerable<T> GetAll();
-        IEnumerable<T> GetById(int id);
-        T  Insert(T entity);
-        T  Update(T entity);
-        T  Delete(int id);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> GetById(int id);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<String> Delete(int id);
     }
 }
